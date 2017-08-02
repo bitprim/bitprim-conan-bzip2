@@ -3,9 +3,10 @@ env:
    global:
      - CONAN_REFERENCE: "bzip2/1.0.6"
      - CONAN_USERNAME: "conan"
-     - CONAN_LOGIN_USERNAME: "lasote"
-     - CONAN_CHANNEL: "testing"
-     - CONAN_UPLOAD: "https://api.bintray.com/conan/conan-community/conan"
+     - CONAN_LOGIN_USERNAME: "dario-ramos"
+     - CONAN_CHANNEL: "stable"
+     # - CONAN_UPLOAD: "https://api.bintray.com/conan/conan-community/conan"
+     - CONAN_UPLOAD: "https://api.bintray.com/conan/bitprim/bitprim-conan-bzip2"
      - CONAN_STABLE_BRANCH_PATTERN: "release/*"
 
 linux: &linux
@@ -15,9 +16,11 @@ linux: &linux
    python: "3.6"
    services:
      - docker
+
 osx: &osx
    os: osx
    language: generic
+
 matrix:
    include:
 
