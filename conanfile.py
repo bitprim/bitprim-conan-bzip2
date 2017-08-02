@@ -5,6 +5,7 @@ from conans import CMake, tools
 from conans import ConanFile
 
 
+
 class Bzip2Conan(ConanFile):
     name = "bzip2"
     version = "1.0.6"
@@ -22,7 +23,7 @@ class Bzip2Conan(ConanFile):
                   "being around twice as fast at compression and six times faster at decompression."
 
     build_policy = "missing" # "always"
-    
+
     @property
     def zip_folder_name(self):
         return "bzip2-%s" % self.version
