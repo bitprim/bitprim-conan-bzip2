@@ -1,12 +1,12 @@
 import platform
 from conan.packager import ConanMultiPackager
-
+import os
 
 if __name__ == "__main__":
     builder = ConanMultiPackager(username="bitprim", channel="stable")
     builder.add_common_builds(shared_option_name="bzip2:shared", pure_c=True)
     builder.password = os.getenv("CONAN_PASSWORD")
-    
+
     if platform.system() == "Windows":  # Library not prepared to create a .lib to link with
         # Remove shared builds in Windows
         static_builds = []
