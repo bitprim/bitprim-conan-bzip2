@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/bitprim/bitprim-conan-bzip2.svg)](https://travis-ci.org/bitprim/bitprim-conan-gmp)
+[![Appveyor Status](https://ci.appveyor.com/api/projects/status/github/bitprim/bitprim-conan-bzip2?svg=true)](https://ci.appveyor.com/project/bitprim/bitprim-conan-bzip2)
 
 # conan-bzip2
 
