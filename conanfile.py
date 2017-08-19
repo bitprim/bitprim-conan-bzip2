@@ -19,11 +19,8 @@
 
 import os
 import shutil
-
 from conans import CMake, tools
 from conans import ConanFile
-
-
 
 class Bzip2Conan(ConanFile):
     name = "bzip2"
