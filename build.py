@@ -5,6 +5,7 @@ if __name__ == "__main__":
     builder = ConanMultiPackager(username="bitprim", channel="stable", archs=["x86_64"])
     builder.add_common_builds(shared_option_name="bzip2:shared")
 
+    #TODO(fernando): redundant? check it!
     if platform.system() == "Windows":  # Library not prepared to create a .lib to link with
         # Remove shared builds in Windows
         static_builds = []
