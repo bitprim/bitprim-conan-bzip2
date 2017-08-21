@@ -3,7 +3,7 @@ env:
    global:
      - CONAN_REFERENCE: "bzip2/1.0.6"
      - CONAN_USERNAME: "bitprim"
-     - CONAN_LOGIN_USERNAME: "bitprim@bitprim"
+     - CONAN_LOGIN_USERNAME: "bitprim-bintray"
      - CONAN_CHANNEL: "stable"
      - CONAN_UPLOAD: "https://api.bintray.com/conan/bitprim/bitprim"
      - CONAN_STABLE_BRANCH_PATTERN: "release/*"
