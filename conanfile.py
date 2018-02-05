@@ -28,8 +28,10 @@ class Bzip2Conan(ConanFile):
     branch = "master"
     generators = "cmake"
     settings = "os", "compiler", "arch", "build_type"
+
     options = {"shared": [True, False], "fPIC": [True, False]}
     default_options = "shared=False", "fPIC=True"
+
     exports = ["CMakeLists.txt"]
     url = "https://github.com/bitprim/bitprim-conan-bzip2"
     license = "BSD-style license"
@@ -40,12 +42,45 @@ class Bzip2Conan(ConanFile):
 
     build_policy = "missing" # "always"
 
+
+    @property
+    def msvc_mt_build(self):
+        return "MT" in str(self.settings.compiler.runtime)
+
+    @property
+    def fPIC_enabled(self):
+        if self.settings.compiler == "Visual Studio":
+            return False
+        else:
+            return self.options.fPIC
+
+    @property
+    def is_shared(self):
+        # if self.options.shared and self.msvc_mt_build:
+        if self.settings.compiler == "Visual Studio" and self.msvc_mt_build:
+            return False
+        else:
+            return self.options.shared
+
+
     @property
     def zip_folder_name(self):
         return "bzip2-%s" % self.version
 
-    def config(self):
-        del self.settings.compiler.libcxx
+    # def config(self):
+    #     del self.settings.compiler.libcxx
+
+
+    def configure(self):
+        del self.settings.compiler.libcxx #Pure-C 
+
+    def config_options(self):
+        self.output.info('*-*-*-*-*-* def config_options(self):')
+        if self.settings.compiler == "Visual Studio":
+            self.options.remove("fPIC")
+
+            if self.options.shared and self.msvc_mt_build:
+                self.options.remove("shared")
 
     def source(self):
         zip_name = "bzip2-%s.tar.gz" % self.version
@@ -60,7 +95,8 @@ class Bzip2Conan(ConanFile):
             os.mkdir("_build")
             with tools.chdir("_build"):
                 cmake = CMake(self)
-                if self.options.fPIC:
+                cmake.verbose = True
+                if self.fPIC_enabled:
                     cmake.definitions["FPIC"] = "ON"
                 cmake.configure(build_dir=".", source_dir="..")
                 cmake.build(build_dir=".")
